@@ -1,0 +1,136 @@
+:root{
+    --primary-color: #B87333; 
+    --secondary-color: #303030; 
+}
+
+
+*, *::before, *::after{ 
+    margin: 0; 
+    padding: 0; 
+}
+
+body{
+    display: grid; 
+    place-items: center;
+    font-family: 'Oxygen', sans-serif;
+    color: var(--secondary-color); 
+}
+
+header{ 
+    width: 100%; 
+    text-align: center; 
+    margin: 3rem;  
+}
+
+header h1{
+    padding: 1rem;
+}
+
+header h1, .item-info{
+    font-weight: 700; 
+    letter-spacing: 0.25rem;  
+}
+
+.btn-container{
+    margin-top: 1rem; 
+}
+
+button{
+    cursor: pointer; 
+
+    margin: 0.5rem; 
+    padding: 0.5rem 0.75rem; 
+
+    border-style: none; 
+    border: 2px solid var(--primary-color); 
+    border-radius: 5px; 
+
+    background-color: transparent;
+    color: var(--primary-color); 
+    font-weight: 700; 
+    letter-spacing: 0.25rem; 
+}
+
+button:hover{
+    background-color: var(--primary-color); 
+    color: whitesmoke; 
+
+    transition: background-color 0.8s linear 0s; 
+}
+
+.menu_container{
+    max-width: 400px; 
+}
+.menu-card{ 
+    margin-bottom: 3rem; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+/* .menu-card div{
+    min-width: 400px; 
+} */
+.item-info{  
+    display: flex; 
+    justify-content: space-between;
+    border-bottom: 1px dotted var(--secondary-color);
+    padding-top: 1rem; 
+    padding-bottom: 1rem; 
+}
+
+/* there is a zoom in transition as the card gets smaller, and zoom in transition as card gets bigger*/
+.menu-card img{
+    /* border: 2px solid var(--primary-color);  */
+    border-radius: 5px; 
+}
+
+.item-price{ 
+    color: var(--primary-color); 
+}
+
+.item-desc{
+    line-height: 1.5; 
+}
+
+/* media breakpoint at 795px
+menu cards become 2 column
+
+menu container stays 1 column*/
+@media only screen and (min-width: 795px){
+    .menu_container{ 
+        max-width: 80%;
+    }
+    .menu-card{    
+        display: flex; 
+        flex-direction: row; 
+        align-items: flex-start;
+    }
+    .item_container{
+        /* margin: 1rem;  */
+        margin-left: 1rem; 
+    }
+
+    .item-info{
+        margin-top: 0;
+    }
+}
+
+/* media breakpoint at 1200px
+menu contianer become 2 column
+
+auto create rows 
+set grid column to 2 
+set gap
+*/
+
+@media only screen and (min-width: 1200px){
+    .menu_container{ 
+        max-width: 90%;
+
+        display: grid; 
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem; 
+    }
+
+}

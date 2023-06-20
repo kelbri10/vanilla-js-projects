@@ -1,0 +1,97 @@
+
+/*css variables*/
+:root{ 
+    --secondary-color: #171717; 
+    --ff-primary: 'Merriweather', serif;; 
+    --ff-secondary: 'Work Sans', sans-serif ; 
+}
+*, *::before, *::after{ 
+    margin: 0; 
+    padding: 0; 
+}
+
+body{  
+    height: 100vh;
+    width: 100%; 
+    overflow: hidden; 
+}
+
+header{ 
+    font-family: var(--ff-secondary); 
+    letter-spacing: 0.2rem;
+
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 1rem; 
+}
+
+header h1{ 
+    font-size: 1rem; 
+    color: lightskyblue; 
+}
+
+nav ul{ 
+    display: flex; 
+    list-style: none;
+}
+
+nav ul > li { 
+    margin-left: 2rem; 
+}
+
+.container{ 
+    font-family: var(--ff-primary);
+    height: 100%; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center; 
+}
+
+.container p{ 
+    font-size: 2rem; 
+    font-weight: bold; 
+    letter-spacing: 0.2rem;
+
+    padding: 0.5rem 1rem; 
+
+    margin: 1rem; 
+    border-radius: 10px; 
+    background-color: var(--secondary-color); 
+    color: white; 
+}
+
+.container span{ 
+    color: lightskyblue; 
+}
+
+.submit-btn{ 
+    cursor: pointer; 
+
+    background-color: transparent; 
+    color: var(--secondary-color); 
+    border-style: none; 
+    border: 2px solid var(--secondary-color); 
+
+    font-size: 1rem;
+    font-weight: bold; 
+    font-family: var(--ff-primary);
+    text-transform: uppercase;  
+    letter-spacing: 0.5rem; 
+    padding: 1rem; 
+    border-radius: 10px; 
+
+    box-shadow: 13px 11px 15px 0px #25252557;
+
+    transition: background-color 1s ease 0s;
+    transition: color 1s ease 0s; 
+}
+
+.submit-btn:hover{ 
+    background-color: var(--secondary-color); 
+    color: white; 
+}
