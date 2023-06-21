@@ -2,41 +2,69 @@ import reviews from './reviewData.js';
 
 const surpriseBtn = document.querySelector('.surprise-btn'); 
 const btnArray = document.querySelectorAll('.change-btn'); 
-
+const reviewContainer = document.querySelector('.review_container'); 
+let currentIndex = 0;
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('i loaded in from the dom content loaded code block'); 
-    console.log(reviews); 
+    //display first review on document load 
+    let firstReview = reviews[0]; 
+    let lastReview = reviews[reviews.length-1];   
 
-    btnArray.forEach(btn => btn.addEventListener('click', () =>{
+    reviewContainer.innerHTML = `
+        <p> ${firstReview.author} </p>
+    `; 
+    
+    btnArray.forEach(btn => btn.addEventListener('click', (e) =>{
+        e.preventDefault(); 
         let show = btn.dataset.show;  
+        // reviewContainer.innerHTML = ''; 
+        switch(show) {
+            case 'next': 
+                console.log(`this is the current index: ${currentIndex}`); 
+                currentIndex += 1;
+                console.log(`this is the next index: ${currentIndex}`); 
+                getReviewDisplay(currentIndex, show); 
+               
+                break; 
+            case 'previous': 
+                console.log(`this is the current index: ${currentIndex}`); 
+                currentIndex -= 1; 
+                console.log(`this is the previous index: ${currentIndex}`)
+                getReviewDisplay(currentIndex, show);    
+                break;
+        }
 
-        displayReview(show); 
+        // displayReview(reviews, show); 
     })); 
+
+    const getReviewDisplay = (index, show) => {
+        let nextReview = reviews[index]; 
+
+        if ((typeof nextReview === 'undefined') && (show === 'next')){
+            reviewContainer.innerHTML = `<p> ${firstReview.author} </p>`; 
+            return currentIndex = 0; 
+        } else if((typeof nextReview === 'undefined') && (show === 'previous')){
+            reviewContainer.innerHTML = `<p> ${lastReview.author} </p>`; 
+            return currentIndex = reviews.length - 1; 
+        }else{ 
+            reviewContainer.innerHTML = `<p> ${nextReview.author} </p>`
+        }
+    }
 
     surpriseBtn.addEventListener('click', (e) => {
         e.preventDefault(); 
-        let review = getRandomReview(); 
+        let randomReview = getRandomReview(); 
+        reviewContainer.innerHTML = `<p> ${randomReview.author} </p>`; 
 
-        console.log(review); 
+        currentIndex = reviews.indexOf(randomReview); 
     }); 
 }); 
 
-//on document load, user sees the first review in the array
-//when user clicks the right arrow, elem + 1 to display next array element if there are no more 
-//user restarts back at the beginning of array
-
-//when user clicks the left arrow, elem - 1 to display next array element previous
-//user restarts at the last element in the array if there are no more elements 
-const displayReview = show => {
-     console.log(`this will show the ${show} element`); 
-}
-
 //when user clicks surprise me, get random num generator in order to display a review not
 //currently being displayed on the page
-
 const getRandomReview = () => { 
     console.log('im in the random review generator'); 
-    let randomNumber = Math.floor(Math.random() * reviews.length)
-
-    return reviews[randomNumber]; 
+    let randomNumber = Math.floor(Math.random() * (reviews.length - 1)); 
+    let randomReview = reviews[randomNumber]; 
+    
+    return randomReview; 
 }
