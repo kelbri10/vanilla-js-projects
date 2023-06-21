@@ -13,32 +13,28 @@ window.addEventListener('DOMContentLoaded', () => {
         <p> ${firstReview.author} </p>
     `; 
     
+    //increases or decreases index to display next or previous review
     btnArray.forEach(btn => btn.addEventListener('click', (e) =>{
         e.preventDefault(); 
         let show = btn.dataset.show;  
         // reviewContainer.innerHTML = ''; 
         switch(show) {
             case 'next': 
-                console.log(`this is the current index: ${currentIndex}`); 
                 currentIndex += 1;
-                console.log(`this is the next index: ${currentIndex}`); 
                 getReviewDisplay(currentIndex, show); 
-               
                 break; 
             case 'previous': 
-                console.log(`this is the current index: ${currentIndex}`); 
                 currentIndex -= 1; 
-                console.log(`this is the previous index: ${currentIndex}`)
                 getReviewDisplay(currentIndex, show);    
                 break;
         }
 
-        // displayReview(reviews, show); 
     })); 
 
     const getReviewDisplay = (index, show) => {
         let nextReview = reviews[index]; 
 
+        //checks the value of queued review and filter, resets if undefined 
         if ((typeof nextReview === 'undefined') && (show === 'next')){
             reviewContainer.innerHTML = `<p> ${firstReview.author} </p>`; 
             return currentIndex = 0; 
@@ -50,6 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //shows random review, sets current index to the random index
     surpriseBtn.addEventListener('click', (e) => {
         e.preventDefault(); 
         let randomReview = getRandomReview(); 
@@ -65,6 +62,6 @@ const getRandomReview = () => {
     console.log('im in the random review generator'); 
     let randomNumber = Math.floor(Math.random() * (reviews.length - 1)); 
     let randomReview = reviews[randomNumber]; 
-    
+
     return randomReview; 
 }
