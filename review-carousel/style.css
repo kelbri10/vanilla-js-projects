@@ -55,9 +55,17 @@ h1{
     border-radius: 50%; 
 }
 
-.review_container p{ 
-    font-size: 1.25rem; 
+.review_container p{  
     margin: 0.5rem; 
+}
+
+.review_author, .review_content{ 
+    font-size: 1.25rem; 
+}
+.review_title{ 
+    font-size: 0.75rem; 
+    text-transform: uppercase;
+    font-weight: bold; 
 }
 
 .review_content{ 
