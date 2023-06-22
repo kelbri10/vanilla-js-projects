@@ -9,15 +9,12 @@ window.addEventListener('DOMContentLoaded', () => {
     let firstReview = reviews[0]; 
     let lastReview = reviews[reviews.length-1];   
 
-    reviewContainer.innerHTML = `
-        <p> ${firstReview.author} </p>
-    `; 
-    
+    generateHTML(firstReview); 
     //increases or decreases index to display next or previous review
     btnArray.forEach(btn => btn.addEventListener('click', (e) =>{
         e.preventDefault(); 
         let show = btn.dataset.show;  
-        // reviewContainer.innerHTML = ''; 
+    
         switch(show) {
             case 'next': 
                 currentIndex += 1;
@@ -36,13 +33,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
         //checks the value of queued review and filter, resets if undefined 
         if ((typeof nextReview === 'undefined') && (show === 'next')){
-            reviewContainer.innerHTML = `<p> ${firstReview.author} </p>`; 
+            generateHTML(firstReview); 
             return currentIndex = 0; 
         } else if((typeof nextReview === 'undefined') && (show === 'previous')){
-            reviewContainer.innerHTML = `<p> ${lastReview.author} </p>`; 
+            generateHTML(lastReview); 
             return currentIndex = reviews.length - 1; 
         }else{ 
-            reviewContainer.innerHTML = `<p> ${nextReview.author} </p>`
+            generateHTML(nextReview); 
         }
     }
 
@@ -50,7 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
     surpriseBtn.addEventListener('click', (e) => {
         e.preventDefault(); 
         let randomReview = getRandomReview(); 
-        reviewContainer.innerHTML = `<p> ${randomReview.author} </p>`; 
+        generateHTML(randomReview); 
 
         currentIndex = reviews.indexOf(randomReview); 
     }); 
@@ -64,4 +61,13 @@ const getRandomReview = () => {
     let randomReview = reviews[randomNumber]; 
 
     return randomReview; 
+}
+
+const generateHTML = (obj) => { 
+    return reviewContainer.innerHTML = `
+        <img src =${obj.img} alt ='placeholder img' />
+        <p class='review_author'> ${obj.author} </p>
+        <p class = 'review_title'> ${obj.title} </p> 
+        <p class='review_content'> ${obj.content}</p>
+    `; 
 }
